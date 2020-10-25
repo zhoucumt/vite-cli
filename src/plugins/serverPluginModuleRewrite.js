@@ -26,13 +26,14 @@ function rewriteImports(source) {
 function moduleRewritePlugin({app, root}) {
   app.use(async (ctx, next) => {
     await next();
-    let content = await readBody(ctx.body);
-    console.log('========: ', content);
-    // if (ctx.body && ctx.response.is('js')) {
-    //   let content = await readBody(ctx.body);
-    //   const result = rewriteImports(content);
-    //   ctx.body = result; // 将重写的内容响应到body上面
-    // }
+    // let content = await readBody(ctx.body);
+    // console.log('========: ', content);
+    if (ctx.body && ctx.response.is('js')) {
+      let content = await readBody(ctx.body);
+      console.log('========: ', content);
+      // const result = rewriteImports(content);
+      // ctx.body = result; // 将重写的内容响应到body上面
+    }
   })
 }
 

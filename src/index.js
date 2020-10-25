@@ -1,6 +1,9 @@
 const Koa = require('koa');
 const {serveStaticPlugin} = require('./plugins/serverPluginServeStatic.js');
 const {moduleRewritePlugin} = require('./plugins/serverPluginModuleRewrite.js');
+const {moduleResolvePlugin} = require('./plugins/serverPluginModuleResolvePlugin.js')
+const {htmlRewritePlugin} = require('./plugins/serverPluginHtmlRewritePlugin.js');
+// const {vuePlugin} = require('./plugins/servePluginVue')
 
 function createServer() {
   const app = new Koa();
@@ -15,7 +18,9 @@ function createServer() {
 
   // 插件的集合
   const resolvedPlugins = [
-    // 
+    // 3.解析 以/@mudules文件开头的内容 找到对应的结果
+    moduleResolvePlugin,
+    // 2.解析import 重写路径
     moduleRewritePlugin,
     // 1.要实现静态服务的功能
     serveStaticPlugin
