@@ -7,4 +7,5 @@ function serveStaticPlugin({app, root}) {
   app.use(static(path.join(root, 'public')));
 }
 
+// module.exports = serveStaticPlugin;
 exports.serveStaticPlugin = serveStaticPlugin;

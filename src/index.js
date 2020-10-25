@@ -1,5 +1,6 @@
 const Koa = require('koa');
-const {serveStaticePlugin} = require('./plugins/serverPluginServeStatic.js');
+const {serveStaticPlugin} = require('./plugins/serverPluginServeStatic.js');
+const {moduleRewritePlugin} = require('./plugins/serverPluginModuleRewrite.js');
 
 function createServer() {
   const app = new Koa();
@@ -14,8 +15,10 @@ function createServer() {
 
   // 插件的集合
   const resolvedPlugins = [
+    // 
+    moduleRewritePlugin,
     // 1.要实现静态服务的功能
-    serveStaticePlugin
+    serveStaticPlugin
   ];
 
   resolvedPlugins.forEach(plugin => plugin(context));
